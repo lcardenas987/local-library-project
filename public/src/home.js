@@ -70,10 +70,16 @@ function getMostPopularAuthors(books, authors) {
     return acc;
   }, {});
 
-  for (let id in count) {
-    const sum = count[id].reduce((a, b) => a + b);
-    count[id] = sum;
-  }
+ 
+for (let authorId in count) {
+  const totalBorrows = count[authorId].reduce(
+    (total, borrowCount) => total + borrowCount,
+    0
+  );
+
+  count[authorId] = totalBorrows;
+}
+
 
   const sorted = _sortObjectByValues(count);
   return sorted
